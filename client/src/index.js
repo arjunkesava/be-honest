@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import CreateForm from './components/CreateForm';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Route path="/" component={App} />
+      <Route path="/:userId/:formId" component={CreateForm} />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,0 +1,41 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #343837;
+  color: white;
+}
+
+.jumbotron {
+  background-color: #171918;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #017374;
+}
+
+label {
+  display: flex;
+}
+
+button {
+  display: flex;
+  align-content: flex-end;
+}
+
+.submit-div {
+  margin-top: 3%;
+  text-align: right !important;
+}
+
+.submit {
+  width: 50%;
+  background-color: #017374;
+  border-color: #017374;
+}
+
+.required {
+  font-weight: bolder;
+  color: #FD5956;
+}
