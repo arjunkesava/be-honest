@@ -1,16 +1,23 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
+import { Form, Formik } from 'formik';
 
-class InputFormBody extends React.Component {
+class UserEntriesBody extends React.Component {
   render() {
-    let honestyTextAreaLabelClass = "";
+    // let userNameRequired = '';
+    // let userEmailRequired = '';
     return (
       <Formik
-        initialValues={{ honestyTextArea: '', name: '' }}
-        validate={values => {
-          if (!values.honestyTextArea) {
-            honestyTextAreaLabelClass = 'required';
-          }
+        initialValues={{
+          email: '',
+          name: '',
+        }}
+        validate={() => {
+          // if (!values.name) {
+          //   userNameRequired = 'required';
+          // }
+          // if (!values.email) {
+          //   userEmailRequired = '';
+          // } 
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
@@ -25,23 +32,21 @@ class InputFormBody extends React.Component {
               <div className="row justify-content-center">
                 <div className="col-md-9">
                   <div className="form-group">
-                    <label htmlFor="honestyTextArea" className={honestyTextAreaLabelClass}>
-                      {`Enter what ever you want to tell to ${this.props.userName}.`}
-                    </label>
-                    <textarea className="form-control" id="honestyTextArea" name="honestyTextArea" rows="5" placeholder="Start typing here..."></textarea>
+                    <label htmlFor="userName">Name:</label>
+                    <input className="form-control" id="userName" name="userName" rows="5" />
                   </div>
                 </div>
               </div>
               <div className="row justify-content-center">
                 <div className="col-md-4">
                   <div className="form-group">
-                    <label htmlFor="name">If you want tell me your name:</label>
-                    <input className="form-control" type="text" name="name" placeholder="Optional" />
+                    <label htmlFor="userEmail">Email:</label>
+                    <input className="form-control" type="text" name="userEmail" placeholder="Recomended" />
                   </div>
                 </div>
                 <div className="col-md-5 submit-div">
                   <button type="submit" disabled={isSubmitting} className="btn btn-primary submit">
-                    Done.
+                    Generate.
                   </button>
                 </div>
               </div>
@@ -52,5 +57,5 @@ class InputFormBody extends React.Component {
     );
   }
 }
-
-export default InputFormBody;
+ 
+export default UserEntriesBody;

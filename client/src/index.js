@@ -9,8 +9,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <Route path="/" component={App} />
-      <Route path="/:userId/:formId" component={CreateForm} />
+      <Route exact path="/:userId/:formId" component={App} />
+      <Route exact path="/" component={CreateForm} />
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
