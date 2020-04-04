@@ -3,21 +3,21 @@ import { Form, Formik } from 'formik';
 
 class UserEntriesBody extends React.Component {
   render() {
-    // let userNameRequired = '';
-    // let userEmailRequired = '';
+    let userNameRequired = '';
+    let userEmailRequired = '';
     return (
       <Formik
         initialValues={{
-          email: '',
-          name: '',
+          userName: '',
+          userEmail: '',
         }}
-        validate={() => {
-          // if (!values.name) {
-          //   userNameRequired = 'required';
-          // }
-          // if (!values.email) {
-          //   userEmailRequired = '';
-          // } 
+        validate={values => {
+          if (!values.userName) {
+            userNameRequired = 'required';
+          }
+          if (!values.userEmail) {
+            userEmailRequired = 'required';
+          } 
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
@@ -32,21 +32,22 @@ class UserEntriesBody extends React.Component {
               <div className="row justify-content-center">
                 <div className="col-md-9">
                   <div className="form-group">
-                    <label htmlFor="userName">Name:</label>
-                    <input className="form-control" id="userName" name="userName" rows="5" />
+                    <label htmlFor="userName" className={userNameRequired}>Enter your Name:</label>
+                    <input className="form-control" id="userName" name="userName" placeholder="Enter your beautiful name here"/>
                   </div>
                 </div>
               </div>
               <div className="row justify-content-center">
                 <div className="col-md-4">
                   <div className="form-group">
-                    <label htmlFor="userEmail">Email:</label>
-                    <input className="form-control" type="text" name="userEmail" placeholder="Recomended" />
+                    <label htmlFor="userEmail" className={userEmailRequired}>Enter your Email-Id:</label>
+                    <input className="form-control" type="email" name="userEmail" placeholder="Recomended" />
+                    <small id="emailHelp" className="form-text text-muted">We need your email to send the generated links.</small>
                   </div>
                 </div>
                 <div className="col-md-5 submit-div">
                   <button type="submit" disabled={isSubmitting} className="btn btn-primary submit">
-                    Generate.
+                    Generate Link
                   </button>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 body {
-  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   background-color: #343837;
   color: white;
 }
@@ -8,25 +8,27 @@ body {
 .jumbotron {
   background-color: #171918;
   text-align: center;
+  padding: 2rem;
 }
 
 .alert-info {
-  width: 48%;
   margin-top: 3%;
+  width: 48%;
 }
 
 .display-5 {
   text-align: center;
 }
+
 .display-6 {
-  text-align: center;
   margin-bottom: 3%;
+  text-align: center;
 }
 
 a {
+  color: #017374;
   cursor: pointer;
   text-decoration: underline;
-  color: #017374;
 }
 
 label {
@@ -34,8 +36,8 @@ label {
 }
 
 button {
-  display: flex;
   align-content: flex-end;
+  display: flex;
 }
 
 .submit-div {
@@ -44,12 +46,64 @@ button {
 }
 
 .submit {
-  width: 50%;
   background-color: #017374;
   border-color: #017374;
+  width: 50%;
 }
 
 .required {
-  font-weight: bolder;
   color: #FD5956;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.post-border {
+  border: 8px solid;
+  border-radius: 10px;
+}
+
+.post-border > p {
+  align-items: stretch;
+  background-color: #15202b;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  font-size: 23px;
+  font-weight: 500;
+  margin: 0;
+  padding: 10%;
+  text-align: center;
+}
+
+.want-to-know {
+  background: #343836;
+  border: 1px solid #ccc;
+  margin: 3%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.want-to-know > h3 {
+  padding: 1rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.want-to-know > p {
+  padding: 0 1rem;
+  font-size: 1.25rem;
+}
+
+.want-to-know > .stripe {
+  color: white;
+  background: repeating-linear-gradient(
+    -55deg,
+    #222,
+    #222 10px,
+    #171918 10px,
+    #171918 20px
+  );
+}
+
+@media (max-width: 576px) { 
+  .alert-info {
+    width: 90%;
+  }  
 }
