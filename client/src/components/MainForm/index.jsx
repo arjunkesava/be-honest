@@ -1,6 +1,7 @@
 import React from 'react';
 import PageHead from '../PageHead';
 import InputFormBody from '../InputFormBody';
+import WantToKnow from '../WantToKnow';
 
 class MainForm extends React.Component {
   render() {
@@ -14,6 +15,7 @@ class MainForm extends React.Component {
         <InputFormBody
           userName={userName}
         />
+        <WantToKnow />
       </>
     );
   }

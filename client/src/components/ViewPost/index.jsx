@@ -1,11 +1,11 @@
 import React from 'react';
+import shuffleArray from '../../helpers/shuffle';
 
 class ViewPost extends React.Component {
   state = {  }
-  shuffle = (array) => array.sort(() => Math.random() - 0.5);
 
   render() { 
-    const borderColors = this.shuffle(['red', 'yellow', 'lime', 'green', 'aqua', 'blue', 'magenta', 'green', 'aqua', 'blue', 'magenta']);
+    const borderColors = shuffleArray(['red', 'yellow', 'lime', 'green', 'aqua', 'blue', 'magenta', 'green', 'aqua', 'blue', 'magenta']);
     // We push the first color to last for uniformity of gradient
     borderColors.push(borderColors[0]);
 

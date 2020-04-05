@@ -57,6 +57,21 @@ button {
   text-transform: uppercase;
 }
 
+.highLightLink {
+  color: #017374;
+  font-size: 24px;
+  margin: 10px;
+  display: flex;
+}
+
+.success-box {
+  background: #161917;
+  padding: 4%;
+  border-radius: 25px;
+  box-shadow: 25px 0 0 orange, -25px 0 0 orange;
+  width: 75%;
+}
+
 .post-border {
   border: 8px solid;
   border-radius: 10px;
@@ -106,4 +121,8 @@ button {
   .alert-info {
     width: 90%;
   }  
+  .highLightLink {
+    font-size: 18px;
+    overflow: hidden;
+  }
 }
