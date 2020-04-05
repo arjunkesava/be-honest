@@ -13,7 +13,6 @@ class UserEntriesBody extends React.Component {
       feedbackFormId: generateRandom(),
       viewFormId: generateRandom(15),
       error: false,
-      runCanvas: true,
       response: {
         status: 404
       }
@@ -74,26 +73,21 @@ class UserEntriesBody extends React.Component {
 
   displaySuccessMessage() {
     const shareLink = `${window.location.hostname}/${this.state.generatedUserId}/${this.state.feedbackFormId}`;
-    const viewLink = `${window.location.hostname}/${this.state.viewFormId}`;
-    setTimeout(() => {
-      this.setState({runCanvas: false});
-    },10000);
+    const viewLink = `${window.location.hostname}/v/${this.state.viewFormId}`;
     return (
       <React.Fragment>
-        {
-          this.state.runCanvas ?
-            <Confetti
-              width={window.innerWidth}
-              height={window.innerHeight}
-            /> :
-            <React.Fragment/>
-        }
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          recycle={false}
+          numberOfPieces={600}
+        />
         <div className="row justify-content-center">
           <div className="container success-box">
             <h2 style={{color: 'orange'}}>Well done! What's next!</h2>
             <p>Aww yeah, you had successfully created this form.</p>
             <p>Share the below link with your friends: <strong className="highLightLink">{shareLink}</strong></p>
-            <p>If anyone of your friends gives feedback, we will send you an e-mail to <strong className="highLightLink" style={{color: 'orange'}}>{this.state.email}</strong>And you can view all your friends response in the below link. Don't worry we will alos send you the below link to your email.</p>
+            <p>If anyone of your friends gives feedback, we will send you an e-mail to <strong className="highLightLink" style={{color: 'orange'}}>{this.state.email}</strong>And you can view all your friends response in the below link. Don't worry we will also send you the below link to your email.</p>
             <p><strong className="highLightLink">{viewLink}</strong></p>
             <p><strong>Note:</strong> Please don't share the above link (it's secret)</p>
           </div>

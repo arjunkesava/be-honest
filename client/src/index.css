@@ -75,6 +75,7 @@ button {
 .post-border {
   border: 8px solid;
   border-radius: 10px;
+  margin-bottom: 5%; 
 }
 
 .post-border > p {
@@ -124,5 +125,10 @@ button {
   .highLightLink {
     font-size: 18px;
     overflow: hidden;
+  }
+  .success-box {
+    border-radius: 12px;
+    box-shadow: 20px 0 0 orange, -20px 0 0 orange;
+    width: 75%;
   }
 }
