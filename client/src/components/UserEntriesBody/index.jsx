@@ -1,70 +1,55 @@
 import React from 'react';
-import generateRandom from '../../helpers/random';
-import validateEmail from '../../helpers/validataEmail';
 import Confetti from 'react-confetti';
+import validateEmail from '../../helpers/validataEmail';
 
 class UserEntriesBody extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      email: 'arpydi@cisco.com',
-      generatedUserId: generateRandom(),
-      feedbackFormId: generateRandom(),
-      viewFormId: generateRandom(15),
+      email: '',
+      generatedUserId: '',
+      feedbackFormId: '',
+      viewFormId: '',
       error: false,
-      response: {
-        status: 404
-      }
+      response: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  generateLinks (values) {
-    const generatedUserId = generateRandom();
-    const feedbackFormId = generateRandom();
-    const viewFormId = generateRandom(15);
+  async uploadDataToApi (payload) {
+    const response = await fetch('/insert/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ payload }),
+    });
+    const body = await response.text();
+    const jsonBody = JSON.parse(body);
 
-    const payload = {
-      name: values.name,
-      email: values.email,
-      generatedUserId,
-      feedbackFormId,
-      viewFormId 
+    if (body) {
+      this.setState({
+        response: response,
+        generatedUserId: jsonBody[`user-id`],
+        feedbackFormId: jsonBody[`form-id`],
+        viewFormId: jsonBody[`view-id`],
+      });
     }
-
-    this.uploadDataToApi(payload);
   }
-
-  uploadDataToApi (payload) {
-    console.log({ payload });
-
-    // const response = await fetch('/api/world', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ post: this.state.post }),
-    // });
-    // const body = await response.text();
-    
-    this.setState({ response: {
-      status: 200
-    }});
-  }
-
-  
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     // Validate the data and push it
     if (
       this.state.name &&
       this.state.email && 
       validateEmail(this.state.email)
     ) {
-      this.generateLinks(this.state);
+      this.uploadDataToApi({
+        name: this.state.name,
+        email: this.state.email
+      });
     } else {
       const error = true;
       this.setState({ error });
@@ -72,8 +57,8 @@ class UserEntriesBody extends React.Component {
   }
 
   displaySuccessMessage() {
-    const shareLink = `${window.location.hostname}/${this.state.generatedUserId}/${this.state.feedbackFormId}`;
-    const viewLink = `${window.location.hostname}/v/${this.state.viewFormId}`;
+    const shareLink = `https://${window.location.hostname}/${this.state.generatedUserId}/${this.state.feedbackFormId}`;
+    const viewLink = `https://${window.location.hostname}/v/${this.state.viewFormId}`;
     return (
       <React.Fragment>
         <Confetti
@@ -86,9 +71,9 @@ class UserEntriesBody extends React.Component {
           <div className="container success-box">
             <h2 style={{color: 'orange'}}>Well done! What's next!</h2>
             <p>Aww yeah, you had successfully created this form.</p>
-            <p>Share the below link with your friends: <strong className="highLightLink">{shareLink}</strong></p>
+            <p>Share the below link with your friends: <strong className="highLightLink"><a href={shareLink} target="_blank">{shareLink}</a></strong></p>
             <p>If anyone of your friends gives feedback, we will send you an e-mail to <strong className="highLightLink" style={{color: 'orange'}}>{this.state.email}</strong>And you can view all your friends response in the below link. Don't worry we will also send you the below link to your email.</p>
-            <p><strong className="highLightLink">{viewLink}</strong></p>
+            <p><strong className="highLightLink"><a href={viewLink} target="_blank">{viewLink}</a></strong></p>
             <p><strong>Note:</strong> Please don't share the above link (it's secret)</p>
           </div>
         </div>
@@ -172,7 +157,10 @@ class UserEntriesBody extends React.Component {
   }
 
   render() {
-    return this.state.response.status !== 200 ? this.displaySuccessMessage() : this.displayCreateForm();
+    if (this.state.response.status === 200) {
+      return this.displaySuccessMessage();
+    }
+    return this.displayCreateForm();
   }
 }
  
