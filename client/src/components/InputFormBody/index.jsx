@@ -1,5 +1,5 @@
+import { Form, Formik } from 'formik';
 import React from 'react';
-import { Formik, Form } from 'formik';
 
 class InputFormBody extends React.Component {
   render() {
@@ -33,13 +33,15 @@ class InputFormBody extends React.Component {
                 </div>
               </div>
               <div className="row justify-content-center">
-                <div className="col-md-4">
+                <div className="col-md-6">
                   <div className="form-group">
-                    <label htmlFor="name">If you want tell me your name:</label>
+                    <label htmlFor="name">
+                      {`If you want tell ${this.props.userName} your name:`}
+                    </label>
                     <input className="form-control" type="text" name="name" placeholder="Optional" />
                   </div>
                 </div>
-                <div className="col-md-5 submit-div">
+                <div className="col-md-3 submit-div">
                   <button type="submit" disabled={isSubmitting} className="btn btn-primary submit">
                     Done.
                   </button>

@@ -4,7 +4,7 @@ class PageHead extends React.Component {
   state = {}
   render() {
     const anonymousLink = "https://www.google.com/search?q=explain+anonymous&oq=explain+anonymous";
-    const subSection = this.props.subSectionParagraph + ' This is you chance';
+    const subSection = this.props.subSectionParagraph + ' This is your chance';
     return (
       <div className="jumbotron">
         <h1 className="display-5">Welcome to BeHonest!</h1>

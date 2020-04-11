@@ -22,15 +22,35 @@ exports.insertUserWrites = (req,res) => {
   };
 
   // Save Customer in the database
-  BeHonestWrites.insertUserEntriesData(payload, (err, data) => {
+  BeHonestWrites.insertUserEntriesApi(payload, (err, data) => {
     if (err) {
       res.status(500).send({
         message:
           err.message || "Some error occurred while inserting the User Entries."
       });
+    } else {
+      res.send(data);
     }
-    else {
-      res.send(data)
-    };
+  });
+}
+
+exports.checkFormUrl = (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+  }
+
+  var payload = Object.values(req.body.payload);
+
+  BeHonestWrites.checkFormUrlApi(payload, (err, data) => {
+    if (err) {
+      res.status(500).send({
+        message: err.message || "Some error occurred while checking the User Form."
+      });
+    } else {
+      res.send(data);
+    }
   });
 }

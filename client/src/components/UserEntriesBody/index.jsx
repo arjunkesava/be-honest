@@ -1,6 +1,7 @@
 import React from 'react';
 import Confetti from 'react-confetti';
 import validateEmail from '../../helpers/validataEmail';
+import Spinner from '../Spinner';
 
 class UserEntriesBody extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class UserEntriesBody extends React.Component {
       feedbackFormId: '',
       viewFormId: '',
       error: false,
-      response: {}
+      response: {},
+      isLoading: false
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -30,6 +32,7 @@ class UserEntriesBody extends React.Component {
 
     if (body) {
       this.setState({
+        isLoading: false,
         response: response,
         generatedUserId: jsonBody[`user-id`],
         feedbackFormId: jsonBody[`form-id`],
@@ -46,6 +49,7 @@ class UserEntriesBody extends React.Component {
       this.state.email && 
       validateEmail(this.state.email)
     ) {
+      this.setState({ isLoading: true });
       this.uploadDataToApi({
         name: this.state.name,
         email: this.state.email
@@ -71,9 +75,9 @@ class UserEntriesBody extends React.Component {
           <div className="container success-box">
             <h2 style={{color: 'orange'}}>Well done! What's next!</h2>
             <p>Aww yeah, you had successfully created this form.</p>
-            <p>Share the below link with your friends: <strong className="highLightLink"><a href={shareLink} target="_blank">{shareLink}</a></strong></p>
+            <p>Share the below link with your friends: <strong className="highLightLink"><a href={shareLink} target="_blank" rel="noopener noreferrer">{shareLink}</a></strong></p>
             <p>If anyone of your friends gives feedback, we will send you an e-mail to <strong className="highLightLink" style={{color: 'orange'}}>{this.state.email}</strong>And you can view all your friends response in the below link. Don't worry we will also send you the below link to your email.</p>
-            <p><strong className="highLightLink"><a href={viewLink} target="_blank">{viewLink}</a></strong></p>
+            <p><strong className="highLightLink"><a href={viewLink} target="_blank" rel="noopener noreferrer">{viewLink}</a></strong></p>
             <p><strong>Note:</strong> Please don't share the above link (it's secret)</p>
           </div>
         </div>
@@ -157,6 +161,9 @@ class UserEntriesBody extends React.Component {
   }
 
   render() {
+    if(this.state.isLoading) {
+      return <Spinner />;
+    }
     if (this.state.response.status === 200) {
       return this.displaySuccessMessage();
     }

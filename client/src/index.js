@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 import CreateForm from './components/CreateForm';
+import MainForm from './components/MainForm';
 import ThankYou from './components/ThankYou';
 import ViewPosts from './components/ViewPosts';
+import './index.css';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <Route exact path="/:userId/:formId" component={App} />
+      <Route exact path="/:userId/:formId" component={MainForm} />
       <Route exact path="/ramarao" component={ViewPosts} />
       <Route exact path="/thankyou" component={ThankYou} />
       <Route exact path="/" component={CreateForm} />

@@ -1,5 +1,7 @@
 module.exports = app => {
-  const BeHonestInsertApi = require('../api/insert');
+  const BeHonestApi = require('../api/model');
 
-  app.post('/insert/users', BeHonestInsertApi.insertUserWrites);
+  app.post('/insert/users', BeHonestApi.insertUserWrites);
+
+  app.post('/check/form', BeHonestApi.checkFormUrl);
 }
