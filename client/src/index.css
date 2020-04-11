@@ -74,8 +74,9 @@ button {
 
 .post-border {
   border: 8px solid;
-  border-radius: 10px;
-  margin-bottom: 5%; 
+  border-radius: 10px; 
+  margin-top: 4%;
+  margin-bottom: 1%;
 }
 
 .post-border > p {

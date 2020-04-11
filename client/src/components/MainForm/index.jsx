@@ -65,7 +65,14 @@ class MainForm extends React.Component {
     } else if(!this.state.isUrlValid) {
       return <NotFound />;
     } else {
-      return <InputFormBody userName={this.state.userName} />;
+      var {
+        match: {
+          params: {
+            userId
+          }
+        }
+      } = this.props;
+      return <InputFormBody userName={this.state.userName} userId={userId} />;
     }
   }
 

@@ -20,15 +20,15 @@ class UserEntriesBody extends React.Component {
   }
 
   async uploadDataToApi (payload) {
-    const response = await fetch('/insert/users', {
+    var response = await fetch('/insert/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ payload }),
     });
-    const body = await response.text();
-    const jsonBody = JSON.parse(body);
+    var body = await response.text();
+    var jsonBody = JSON.parse(body);
 
     if (body) {
       this.setState({
@@ -55,14 +55,14 @@ class UserEntriesBody extends React.Component {
         email: this.state.email
       });
     } else {
-      const error = true;
+      var error = true;
       this.setState({ error });
     }
   }
 
   displaySuccessMessage() {
-    const shareLink = `https://${window.location.hostname}/${this.state.generatedUserId}/${this.state.feedbackFormId}`;
-    const viewLink = `https://${window.location.hostname}/v/${this.state.viewFormId}`;
+    var shareLink = `https://${window.location.hostname}/${this.state.generatedUserId}/${this.state.feedbackFormId}`;
+    var viewLink = `https://${window.location.hostname}/v/${this.state.viewFormId}`;
     return (
       <React.Fragment>
         <Confetti

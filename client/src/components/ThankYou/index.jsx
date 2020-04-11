@@ -1,17 +1,25 @@
 import React from 'react';
-import ThankYouHeader from './ThankYouHeader';
 import ViewPost from '../ViewPost';
 import WantToKnow from '../WantToKnow';
+import ThankYouHeader from './ThankYouHeader';
 
 class ThankYou extends React.Component {
   state = {}
 
+  getPostContentFromWebStorage () {
+    var storage = localStorage.getItem('be-honest-form');
+    if (!!storage) {
+      return JSON.parse(storage);
+    }
+    return false;
+  }
+
   displayUserPost() {
-    const post = 'Hello Doctoer, Heart miss ayya';
+    const post = this.getPostContentFromWebStorage();
     return (
       <div className="container">
         <p className="lead">This is how your comment looks like:</p>
-        <ViewPost post={post} />
+        <ViewPost post={post.content} name={post.name} />
       </div>
     )
   }
@@ -20,7 +28,7 @@ class ThankYou extends React.Component {
     return (
       <>
         <ThankYouHeader/>
-        { this.displayUserPost() }
+        { this.getPostContentFromWebStorage() ? this.displayUserPost() : <React.Fragment /> }
         <WantToKnow />
       </>
     );
