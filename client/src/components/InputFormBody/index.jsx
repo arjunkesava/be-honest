@@ -1,5 +1,6 @@
-import React from "react";
-import Spinner from "../Spinner";
+import React from 'react';
+import ServerError from '../ServerError';
+import Spinner from '../Spinner';
 
 class InputFormBody extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class InputFormBody extends React.Component {
       honestyTextArea: '',
       isLoading: false,
       name: '',
+      status: 200
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,16 +27,15 @@ class InputFormBody extends React.Component {
     });
 
     var body = await response.text();
-    var jsonBody = JSON.parse(body);
 
-    console.log({ jsonBody });
+    // Stop the spinner
+    this.setState({
+      isLoading: false,
+      status: response.status
+    });
 
-    if (body) {
-      // Stop the spinner
-      this.setState({
-        isLoading: false,
-      });
-
+    //eslint-disable-next-line
+    if (body && response.status == 200) {
       // Save the date to localStorage for thank you page
       window.localStorage.setItem(`be-honest-form`, body) 
 
@@ -125,9 +126,11 @@ class InputFormBody extends React.Component {
   render() {
     if (this.state.isLoading) {
       return <Spinner />;
-    } else {
-      return this.displayInputForm();
     }
+    if (this.state.status !== 200) {
+      return <ServerError />;
+    }
+    return this.displayInputForm();
   }
 }
 

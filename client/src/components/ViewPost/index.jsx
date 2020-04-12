@@ -9,7 +9,7 @@ const ViewPost = (props) => {
   var borderColors = shuffleArray(['red', 'yellow', 'lime', 'green', 'aqua', 'blue', 'magenta', 'green', 'aqua', 'blue', 'magenta']);
   // We push the first color to last for uniformity of gradient
   borderColors.push(borderColors[0]);
-  var name = capitalizeFirstLetter(props.name) || 'Anonymus';
+  var name = (props.name && capitalizeFirstLetter(props.name)) || 'Anonymus';
 
   return (
     <>

@@ -6,4 +6,6 @@ module.exports = app => {
   app.post('/insert/honests', BeHonestApi.insertHonestWrites);
 
   app.post('/check/form', BeHonestApi.checkFormUrl);
+
+  app.post('/check/posts', BeHonestApi.checkPostsData);
 }

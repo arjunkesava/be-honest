@@ -7,13 +7,6 @@ var dbConfig = {
   database: 'u989381751_honest'
 };
 
-// var connection = mysql.createConnection(dbConfig);
-
-// connection.connect(err => {
-//   if (err) throw err;
-//   console.log('MySQL connected');
-// });
-
 var connection;
 
 function handleDisconnect() {

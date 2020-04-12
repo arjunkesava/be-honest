@@ -1,6 +1,8 @@
 import React from 'react';
 import Confetti from 'react-confetti';
+import { Link } from 'react-router-dom';
 import validateEmail from '../../helpers/validataEmail';
+import ServerError from '../ServerError';
 import Spinner from '../Spinner';
 
 class UserEntriesBody extends React.Component {
@@ -13,7 +15,8 @@ class UserEntriesBody extends React.Component {
       feedbackFormId: '',
       viewFormId: '',
       error: false,
-      response: {},
+      status: 200,
+      success: false,
       isLoading: false
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,12 +31,16 @@ class UserEntriesBody extends React.Component {
       body: JSON.stringify({ payload }),
     });
     var body = await response.text();
-    var jsonBody = JSON.parse(body);
+    this.setState({
+      isLoading: false,
+      status: response.status 
+    });
 
-    if (body) {
-      this.setState({
-        isLoading: false,
-        response: response,
+    //eslint-disable-next-line
+    if (body && response.status == 200) {
+      var jsonBody = JSON.parse(body);
+      this.setState({ 
+        success: true, 
         generatedUserId: jsonBody[`user-id`],
         feedbackFormId: jsonBody[`form-id`],
         viewFormId: jsonBody[`view-id`],
@@ -75,9 +82,9 @@ class UserEntriesBody extends React.Component {
           <div className="container success-box">
             <h2 style={{color: 'orange'}}>Well done! What's next!</h2>
             <p>Aww yeah, you had successfully created this form.</p>
-            <p>Share the below link with your friends: <strong className="highLightLink"><a href={shareLink} target="_blank" rel="noopener noreferrer">{shareLink}</a></strong></p>
+            <p>Share the below link with your friends: <strong className="highLightLink"><Link to={`/${this.state.generatedUserId}/${this.state.feedbackFormId}`} target="_blank" rel="noopener noreferrer">{shareLink}</Link></strong></p>
             <p>If anyone of your friends gives feedback, we will send you an e-mail to <strong className="highLightLink" style={{color: 'orange'}}>{this.state.email}</strong>And you can view all your friends response in the below link. Don't worry we will also send you the below link to your email.</p>
-            <p><strong className="highLightLink"><a href={viewLink} target="_blank" rel="noopener noreferrer">{viewLink}</a></strong></p>
+            <p><strong className="highLightLink"><Link to={`/v/${this.state.viewFormId}`} target="_blank" rel="noopener noreferrer">{viewLink}</Link></strong></p>
             <p><strong>Note:</strong> Please don't share the above link (it's secret)</p>
           </div>
         </div>
@@ -164,8 +171,11 @@ class UserEntriesBody extends React.Component {
     if(this.state.isLoading) {
       return <Spinner />;
     }
-    if (this.state.response.status === 200) {
+    if (this.state.success) {
       return this.displaySuccessMessage();
+    }
+    if (this.state.status !== 200) {
+      return <ServerError />;
     }
     return this.displayCreateForm();
   }

@@ -129,6 +129,15 @@ button {
   animation: spin 1s linear infinite;
 }
 
+.card {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.card-body {
+  background-color: #FB100B;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }

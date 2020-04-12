@@ -44,4 +44,25 @@ BeHonestWrites.checkFormUrlApi = (payload, result) => {
   });
 }
 
+BeHonestWrites.checkPostsDataApi = (payload, result) => {
+  var selectQuery = 'SELECT h.content, h.name FROM `honest-entries` as h INNER JOIN `user-entries` as u ON u.`user-id` = h.`user-id` WHERE u.`view-id` = ?';
+  sql.query(selectQuery, payload, (error, response) => {
+    if(error) {
+      console.log({ error });
+      result(err, null);
+      return;
+    }
+
+    if (!!response) {
+      response = [{}];
+    }
+    
+    result(null, response);
+    return;
+  });
+}
+
+// `honest-entries`;
+// `user-entries`;
+
 module.exports = BeHonestWrites;

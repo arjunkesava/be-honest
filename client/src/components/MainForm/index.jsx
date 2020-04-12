@@ -2,6 +2,7 @@ import React from 'react';
 import InputFormBody from '../InputFormBody';
 import NotFound from '../NotFound';
 import PageHead from '../PageHead';
+import ServerError from '../ServerError';
 import Spinner from '../Spinner';
 import WantToKnow from '../WantToKnow';
 
@@ -9,7 +10,8 @@ class MainForm extends React.Component {
   state = {
     userName: '',
     isUrlValid: true,
-    isLoading: true
+    isLoading: true,
+    status: 200
   };
 
   validateUrlParams(userId, formId) {
@@ -44,18 +46,29 @@ class MainForm extends React.Component {
       var response = await fetch('/check/form', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ payload }),
       });
       var body = await response.text();
-      var jsonBody = JSON.parse(body);
-      // if the name is present then we assume its valid
-      if(jsonBody && jsonBody[0] && jsonBody[0].name && jsonBody[0].email) {
-        isUrlValid = true;
-        userName = jsonBody[0].name;
+      this.setState({ 
+        isLoading: false,
+        status: response.status
+      });
+
+      //eslint-disable-next-line
+      if (body && response.status == 200) {
+        var jsonBody = JSON.parse(body);
+        // if the name is present then we assume its valid
+        if(jsonBody && jsonBody[0] && jsonBody[0].name && jsonBody[0].email) {
+          isUrlValid = true;
+          userName = jsonBody[0].name;
+        }
+        this.setState({
+          isUrlValid,
+          userName
+        });
       }
-      this.setState({ isUrlValid, userName, isLoading: false });
     }
   }
 
@@ -77,13 +90,13 @@ class MainForm extends React.Component {
   }
 
   render() {
-    const subHeading = `If you want to say anything to <strong>${this.state.userName}</strong>`;
+    var subHeading = `If you want to say anything to <strong>${this.state.userName}</strong>`;
     return (
       <>
         <PageHead
           subSectionParagraph={subHeading}
         />
-        {this.displayMainFormComponent()}
+        { this.state.status !== 200 ? <ServerError /> : this.displayMainFormComponent() }
         <WantToKnow />
       </>
     );
