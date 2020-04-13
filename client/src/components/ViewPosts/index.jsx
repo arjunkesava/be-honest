@@ -41,7 +41,7 @@ class ViewPosts extends React.Component {
     //eslint-disable-next-line
     if (response.status == 200) {
       this.setState({
-        posts: JSON.parse(body || {})
+        posts: JSON.parse(body)
       });
     }
   }
@@ -50,8 +50,17 @@ class ViewPosts extends React.Component {
     if (this.state.status !== 200) {
       return <ServerError />;
     }
-    if(this.state.posts.length !== 0) {
-      return this.state.posts.map((post, index) => {
+    var posts = this.state.posts;
+    if(posts.length !== 0) {
+      if (
+        posts.length === 1 &&
+        posts[0].content === null &&
+        posts[0].name === null
+      ) {
+        var shareLink = `http://${window.location.hostname}/${posts[0]['user-id']}/${posts[0]['form-id']}`;
+        return <NoViews shareLink={shareLink} email={posts[0].email} />;
+      }
+      return posts.map((post, index) => {
         return (
           <div className="container">
             <p className="mb-1">{index+1}) Your Anonymous friend:</p>
@@ -60,7 +69,6 @@ class ViewPosts extends React.Component {
         )
       })
     }
-    return <NoViews />;
   }
 
   render() { 

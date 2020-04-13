@@ -138,6 +138,19 @@ button {
   background-color: #FB100B;
 }
 
+.bd-callout {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid #161917;
+  border-left-width: .25rem;
+  border-radius: .25rem;
+  background-color: #343837;
+}
+
+.bd-callout-warning {
+  border-left-color: #FD5956;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
