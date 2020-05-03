@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 var dbConfig = {
-  host: '127.0.0.1',
-  user: 'root',
-  password: 'tiger',
-  database: 'u989381751_honest'
+  host: process.env.DB_HOST || '127.0.0.1',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || 'tiger',
+  database: process.env.DB_DATABASE || 'u989381751_honest',
 };
 
 var connection;

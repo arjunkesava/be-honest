@@ -43,7 +43,7 @@ class MainForm extends React.Component {
         userId,
         formId,
       };
-      var response = await fetch('/check/form', {
+      var response = await fetch('/api/check/form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

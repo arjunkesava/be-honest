@@ -24,7 +24,7 @@ class ViewPosts extends React.Component {
     var payload = {
       viewId
     };
-    var response = await fetch('/check/posts',{
+    var response = await fetch('/api/check/posts',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

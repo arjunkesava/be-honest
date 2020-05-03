@@ -18,7 +18,7 @@ class InputFormBody extends React.Component {
   
 
   async uploadDataToApi (payload) {
-    var response = await fetch('/insert/honests', {
+    var response = await fetch('/api/insert/honests', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

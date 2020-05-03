@@ -8,8 +8,8 @@ class UserEntriesBody extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'Kesava',
-      email: 'share@gm.com',
+      name: '',
+      email: '',
       generatedUserId: '',
       feedbackFormId: '',
       viewFormId: '',
@@ -22,7 +22,7 @@ class UserEntriesBody extends React.Component {
   }
 
   async uploadDataToApi(payload) {
-    var response = await fetch('/insert/users', {
+    var response = await fetch('/api/insert/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
