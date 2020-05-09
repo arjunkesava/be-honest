@@ -151,6 +151,23 @@ button {
   border-left-color: #FD5956;
 }
 
+.share-button {
+  display: flex;
+}
+
+.share-button > button {
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+.share-button > button:first-child {
+  margin-left: 0;
+}
+
+.share-button > button:last-child {
+  margin-right: 0;
+}
+
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -174,5 +191,8 @@ button {
     border-radius: 12px;
     box-shadow: 20px 0 0 orange, -20px 0 0 orange;
     width: 75%;
+  }
+  .share-button {
+    justify-content: space-between;
   }
 }

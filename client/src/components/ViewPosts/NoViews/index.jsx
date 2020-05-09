@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ShareButtons from '../../ShareButtons';
 
 const NoViews = (props) => {
   return (
@@ -18,6 +19,7 @@ const NoViews = (props) => {
               >{props.shareLink}</Link>
             </strong>
           </div>
+          <ShareButtons shareLink={props.shareLink} />
         </p>
         <p>
           If anyone of your friends gives feedback, we will send you an e-mail
